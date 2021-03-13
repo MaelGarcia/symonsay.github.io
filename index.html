@@ -90,6 +90,7 @@
   </head>
   <body>
     <div class="gameboard">
+      <audio id="soundMario" src="sonidoMonedasMarioShort.mp3"></audio>
       <div id="celeste" class="color celeste left" data-color="celeste"></div>
       <div id="violeta" class="color violeta right" data-color="violeta"></div>
       <div id="naranja" class="color naranja left" data-color="naranja"></div>
@@ -98,6 +99,7 @@
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        const soundMario =  document.getElementById('soundMario')
         const celeste = document.getElementById('celeste')
         const violeta = document.getElementById('violeta')
         const naranja = document.getElementById('naranja')
@@ -125,6 +127,7 @@
                     naranja,
                     verde
                 }
+                this.sound = soundMario
             }
 
             toggleBtnEmpezar(){
@@ -182,7 +185,7 @@
 
             iluminarColor(color) {
                 this.colores[color].classList.add('light')
-                setTimeout(() => this.apagarColor(color), 350)
+                setTimeout(() => this.apagarColor(color), 550)
             }
 
             apagarColor(color){
@@ -203,10 +206,15 @@
                 this.colores.naranja.removeEventListener('click',this.elegirColor)
             }
 
+            playSound(){
+               this.sound.play();
+            }
+
             elegirColor(ev){
                 const nombreColor = ev.target.dataset.color
                 const numeroColor = this.transformarColorANumero(nombreColor)
                 this.iluminarColor(nombreColor)
+                this.playSound()
                 if (numeroColor === this.secuencia[this.subnivel]){
                     this.subnivel++
                     if(this.subnivel === this.nivel){
