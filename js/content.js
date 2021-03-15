@@ -5,6 +5,7 @@
         const naranja = document.getElementById('naranja')
         const verde = document.getElementById('verde')
         const btnEmpezar = document.getElementById('btnEmpezar')
+        var SCORE_INIT = 0      
         const ULTIMO_NIVEL = 10
 
          
@@ -118,6 +119,17 @@
                 this.sound.gameOver.play();
             }
 
+            scoreUp(){
+                SCORE_INIT+=5
+                document.getElementById("score").innerHTML = SCORE_INIT
+            }
+
+            scoreClen(){
+                SCORE_INIT=0
+                document.getElementById("score").innerHTML = SCORE_INIT
+            }
+
+
             elegirColor(ev){
                 const nombreColor = ev.target.dataset.color
                 const numeroColor = this.transformarColorANumero(nombreColor)
@@ -125,6 +137,7 @@
                 this.playSound()
                 if (numeroColor === this.secuencia[this.subnivel]){
                     this.subnivel++
+                    this.scoreUp()
                     if(this.subnivel === this.nivel){
                         this.nivel ++
                         this.eliminarEventosClick()
@@ -133,7 +146,6 @@
                         }else {
                             setTimeout(this.siguienteNivel,1500)
                         }
-
                     }
                 } else {
                     this.gameOverSound()
@@ -148,10 +160,12 @@
 
 
             perdioElJuego(){
-              swal('Symon Says','Perdiste :( !!', 'error')
+              swal('Symon Says',`Fin del Juego tu SCORE ES: ${ SCORE_INIT } !!`, 'error')
                 .then(() => {
                     this.eliminarEventosClick()
+                    this.scoreClen()
                     this.inicializar()
+
                 })
             }
 

@@ -22,6 +22,24 @@ body {
     height: 100vh;
   }
 
+  .container_score {
+    height: 70px;
+    width: 200px;
+    background-color: lightblue;
+    position: absolute;
+    letter-spacing: 0.8em;
+    font-family: Helvetica;
+    top: 85%;
+    right: 45%;
+    border-radius: 12px;
+  }
+
+  #score{
+    position: absolute;
+    left: 80%;
+    top: 30%;
+  }
+
   
 
   .gameboard {
@@ -83,16 +101,14 @@ body {
   .btn-start {
     width: 400px;
     height: 100px;
-    background: transparent;
-    border: 2px solid #0099CC;
-    border-radius: 6px;
-    color: #2c3e50;
+    background-color: white;
+    border: 6px solid #0099CC;
+    border-radius: 12px;
     font-size: 2.5rem;
     position: absolute;
     top: calc(50% - 50px);
     left: calc(50% - 200px);
     border: none;
-    
   }
 
   .hide {
