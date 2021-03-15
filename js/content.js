@@ -44,7 +44,7 @@
             }
 
             generarSecuencia(){
-                this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random() * 4))
+                this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random() * 4 ))
             }
 
             siguienteNivel(){
@@ -128,6 +128,15 @@
                 SCORE_INIT=0
                 document.getElementById("score").innerHTML = SCORE_INIT
             }
+            
+            levelClean(){
+                this.nivel =0
+                document.getElementById("level").innerHTML = this.nivel
+            }
+
+            levelUp(){
+                document.getElementById("level").innerHTML = this.nivel
+            }
 
 
             elegirColor(ev){
@@ -140,6 +149,7 @@
                     this.scoreUp()
                     if(this.subnivel === this.nivel){
                         this.nivel ++
+                        this.levelUp()
                         this.eliminarEventosClick()
                         if(this.nivel === (ULTIMO_NIVEL +1) ){
                             this.ganoElJuego()
@@ -154,8 +164,12 @@
             }
 
             ganoElJuego(){
-              swal('Symon Says','Felicitaciones Ganaste el Juego xD !!', 'success')
-                .then(this.inicializar)
+              swal('Symon Says',`Felicitaciones Ganaste el Juego xD SCORE ES: ${ SCORE_INIT } !!`, 'success')
+                .then(()=>{
+                    this.levelClean()
+                    this.scoreClen()
+                    this.inicializar()
+                })
             }
 
 
@@ -163,6 +177,7 @@
               swal('Symon Says',`Fin del Juego tu SCORE ES: ${ SCORE_INIT } !!`, 'error')
                 .then(() => {
                     this.eliminarEventosClick()
+                    this.levelClean()
                     this.scoreClen()
                     this.inicializar()
 
